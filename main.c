@@ -271,15 +271,15 @@ int replayTTT()
         {
             printf("Finding the winner...\n");
             textcolor(2);
-        printf("Player %d (%c) won!\n", player-1, mark);
-        textcolor(7);
+            printf("Player %d (%c) won!\n", player-1, mark);
+            textcolor(7);
             fflush(stdin);
         }
         else
         {
             textcolor(14);
-        printf("It's a tie!\n");    //Otherwise, it's a tie
-        textcolor(7);
+            printf("It's a tie!\n");    //Otherwise, it's a tie
+            textcolor(7);
         }
 
     }
@@ -315,7 +315,7 @@ int TicTacToeGame()
         textcolor(14);
         printf("To undo enter 10\t\t To redo enter 11\n");
         textcolor(7);
-         printf("Player %d, enter a number from the grid:", player);
+        printf("Player %d, enter a number from the grid:", player);
         fgets(buffer, 10, stdin);
         choice = atoi(buffer);
         //checks if the input is digit to avoid infinite loop
