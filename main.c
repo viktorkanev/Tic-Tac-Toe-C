@@ -2,7 +2,6 @@
 #include <stdlib.h>
 #include <time.h>
 #include <string.h>
-#include <unistd.h>
 #include <windows.h>
 
 void PrintBoard();
@@ -176,7 +175,18 @@ void redo(struct Stack * undoneM, struct Stack * undoneCh, struct Stack * redone
     }
 }
 
+//time delay function for the replay feature
+void delay(int number_of_seconds)
+{
+    // Converting time into milli_seconds
+    int milli_seconds = 1000 * number_of_seconds;
 
+    // Stroing start time
+    clock_t start_time = clock();
+
+    // looping till required time is not acheived
+    while (clock() < start_time + milli_seconds);
+}
 
 //replay function that reads txt file and replays the moves with 2 sec delay
 int replayTTT()
@@ -186,7 +196,7 @@ int replayTTT()
     scanf("%s",filename);
 
     //checks if the file you are trying to open exists
-    if(getArray(filename)==NULL)
+    if(getArray(filename)==(int)NULL)
     {
         textcolor(4);
         printf("\nThe file you are trying to open does not exist!\n");
@@ -274,12 +284,15 @@ int replayTTT()
             printf("Player %d (%c) won!\n", player-1, mark);
             textcolor(7);
             fflush(stdin);
+            fflush(stdout);
         }
         else
         {
             textcolor(14);
             printf("It's a tie!\n");    //Otherwise, it's a tie
             textcolor(7);
+            fflush(stdin);
+            fflush(stdout);
         }
 
     }
@@ -566,7 +579,7 @@ void InitializeBoard()
 }
 
 //loads the entries from the saved file and adds them to array
-void getArray(char filename[50])
+int getArray(char filename[50])
 {
 
     char *token;
@@ -582,19 +595,6 @@ void getArray(char filename[50])
         token=strtok(NULL, ",");
         a++;
     }
-}
-
-//time delay function for the replay feature
-void delay(int number_of_seconds)
-{
-    // Converting time into milli_seconds
-    int milli_seconds = 1000 * number_of_seconds;
-
-    // Stroing start time
-    clock_t start_time = clock();
-
-    // looping till required time is not acheived
-    while (clock() < start_time + milli_seconds);
 }
 
 int main()
