@@ -194,6 +194,10 @@ int replayTTT()
     char filename[50];
     printf("Please enter the name of the file you want to replay:");
     scanf("%s",filename);
+    struct Stack * undoneCh = createStack(9);
+    struct Stack * undoneM = createStack(9);
+    struct Stack * redoneCh = createStack(9);
+    struct Stack * redoneM = createStack(9);
 
     //checks if the file you are trying to open exists
     if(getArray(filename)==(int)NULL)
@@ -220,50 +224,115 @@ int replayTTT()
             if(choice == 1 && TicTacToe[0] == '1')
             {
                 TicTacToe[0] = mark;
+                removeAllElements(redoneCh);
+                removeAllElements(redoneM);
+                push(undoneCh, '1');
+                push(undoneM, mark);
             }
             else if(choice == 2 && TicTacToe[1] == '2')
             {
+                removeAllElements(redoneCh);
+                removeAllElements(redoneM);
+                push(undoneCh, '2');
+                push(undoneM, mark);
                 TicTacToe[1] = mark;
             }
             else if(choice == 3 && TicTacToe[2] == '3')
             {
+                removeAllElements(redoneCh);
+                removeAllElements(redoneM);
+                push(undoneCh, '3');
+                push(undoneM, mark);
                 TicTacToe[2] = mark;
             }
             else if(choice == 4 && TicTacToe[3] == '4')
             {
+                removeAllElements(redoneCh);
+                removeAllElements(redoneM);
+                push(undoneCh, '4');
+                push(undoneM, mark);
                 TicTacToe[3] = mark;
             }
             else if(choice == 5 && TicTacToe[4] == '5')
             {
+                removeAllElements(redoneCh);
+                removeAllElements(redoneM);
+                push(undoneCh, '5');
+                push(undoneM, mark);
                 TicTacToe[4] = mark;
             }
             else if(choice == 6 && TicTacToe[5] == '6')
             {
+                removeAllElements(redoneCh);
+                removeAllElements(redoneM);
+                push(undoneCh, '6');
+                push(undoneM, mark);
                 TicTacToe[5] = mark;
             }
             else if(choice == 7 && TicTacToe[6] == '7')
             {
+                removeAllElements(redoneCh);
+                removeAllElements(redoneM);
+                push(undoneCh, '7');
+                push(undoneM, mark);
                 TicTacToe[6] = mark;
             }
             else if(choice == 8 && TicTacToe[7] == '8')
             {
+                removeAllElements(redoneCh);
+                removeAllElements(redoneM);
+                push(undoneCh, '8');
+                push(undoneM, mark);
                 TicTacToe[7] = mark;
             }
             else if(choice == 9 && TicTacToe[8] == '9')
             {
+                removeAllElements(redoneCh);
+                removeAllElements(redoneM);
+                push(undoneCh, '9');
+                push(undoneM, mark);
                 TicTacToe[8] = mark;
             }
             else if(choice == 10)
             {
-                textcolor(9);
-                printf("The game has been undone here.");
-                textcolor(7);
+                if(!(isEmpty(undoneM)) && !(isEmpty(undoneCh)) && !(isFull(redoneM)) && !(isFull(redoneM)))
+                {
+                    undo(undoneM, undoneCh, redoneM, redoneCh);
+                    textcolor(9);
+                    printf("The game has been undone here.\n");
+                    textcolor(7);
+                    PrintBoard();
+
+                }
+                else
+                {
+                    player--;
+                    textcolor(4);
+                    printf("Sorry you can't undo right now!");
+                    textcolor(7);
+                }
+
             }
             else if(choice == 11)
             {
-                textcolor(10);
-                printf("The game has been redone here.");
-                textcolor(7);
+
+                if(!(isEmpty(redoneM)) && !(isEmpty(redoneCh)) && !(isFull(undoneM)) && !(isFull(undoneCh)))
+                {
+
+                    redo(undoneM, undoneCh, redoneM, redoneCh);
+                    textcolor(10);
+                    printf("The game has been redone here.\n");
+                    textcolor(7);
+                    PrintBoard();
+
+                }
+                else
+                {
+                    player--;
+                    textcolor(4);
+                    printf("Sorry you can't redo right now!");
+                    textcolor(7);
+                }
             }
             player++;
             starting++;
