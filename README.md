@@ -1,1 +1,1 @@
-# kanev_viktor_set08122
+# Tic Tac Toe C implementation
